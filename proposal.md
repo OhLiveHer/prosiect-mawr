@@ -14,4 +14,4 @@ So at the end of the game you will be 6'6 and have 18 million dollars which is L
 1. Everytime you beat a level you get a new chain which will give you a bonus attribute i.e speed, more attack damage, double jump.
 2. Have hidden rooms with clothes that do nothing but add customizability to your character.
 3. Have bonus levels where you play as other rappers (A$AP ROCKY, Playboi Carto, Tyler The Creator)
-4. Have a final boss (probably satan)
+4. Have a final boss (probably satan, or himself)
