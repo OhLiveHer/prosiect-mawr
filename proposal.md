@@ -1,5 +1,5 @@
 # Major Project Proposal :)
-
+Luv Is Ragequit
 ## Description
 A platformer involving Lil Uzi Vert who will be the playable character, the enemies will be his demons as he is known for being sad.
 Upon beating a level you will recieve 1.5 million dollars and your character will grow 1 inch (he starts out at 5'4),
@@ -15,3 +15,5 @@ So at the end of the game you will be 6'6 and have 18 million dollars which is L
 2. Have hidden rooms with clothes that do nothing but add customizability to your character.
 3. Have bonus levels where you play as other rappers (A$AP ROCKY, Playboi Carti, Tyler The Creator)
 4. Have a final boss (probably satan, or himself)
+5. 
+ 
