@@ -11,7 +11,7 @@ So at the end of the game you will be 6'6 and have 18 million dollars which is L
 2. Good graphics (for the background, more or less everything that isnt a character)
 3. Non laggy characters so hopefully somewhat seamless moving
 ## Nice To Have List
-1. Everytime you beat a level you get a new chain which will give you a bonus attribute i.e speed, more attack damage, double jump.
+1. Everytime you beat a level you get a new chain which will give you a bonus attribute i.e speed, more attack damage, double jump. Or after each level you get a special move with the same title as the song.
 2. Have hidden rooms with clothes that do nothing but add customizability to your character.
-3. Have bonus levels where you play as other rappers (A$AP ROCKY, Playboi Carto, Tyler The Creator)
+3. Have bonus levels where you play as other rappers (A$AP ROCKY, Playboi Carti, Tyler The Creator)
 4. Have a final boss (probably satan, or himself)
