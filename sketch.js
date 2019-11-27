@@ -4,6 +4,8 @@ let x = 200;
 let y = 200;
 let shot = 0;
 let money = 0;
+let x1 = 600;
+let y1 = 600;
 
 
 
@@ -19,6 +21,7 @@ function preload() {
   br = loadImage("assets/pewpew.jpg");
   vert = loadImage("assets/uzishoot.png");
   money = loadImage("assets/money.png");
+  demon = loadImage("assets/demon.png");
 }
 
 function setup(){
@@ -35,6 +38,7 @@ function draw() {
   background(br);
   moveUzi();
   fill(0);
+  enemies();
   
 }
 
@@ -75,7 +79,7 @@ function keyPressed() {
   if (key === " ") {
     isAttack = true; 
     uziVert = false;
-    money = 0;   
+    
   }
 }
 
@@ -101,9 +105,18 @@ function uziAttack() {
   imageMode(CENTER);
   image(vert, x, y, 350, 350);
   if (money = 3) {
-    x += 20;
+    y -= 5;
+    x += 15;
+
   }
+  
 
 
 
+}
+
+function enemies() {
+  imageMode(CENTER);
+  image(demon, x1, y1, 150, 150);
+  
 }
