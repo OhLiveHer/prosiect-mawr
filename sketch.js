@@ -4,11 +4,12 @@ let x = 200;
 let y = 200;
 let shot = 0;
 let money = 0;
-let x1 = 600;
-let y1 = 600;
+let x1 = 1650;
+let y1 = 100;
+let moving = 0;
 
 
-
+let enemyMove = true;
 let uziVert = true;
 let movingLeft = false;
 let movingRight = false;
@@ -39,6 +40,7 @@ function draw() {
   moveUzi();
   fill(0);
   enemies();
+  enemiesMove();
   
 }
 
@@ -116,7 +118,29 @@ function uziAttack() {
 }
 
 function enemies() {
-  imageMode(CENTER);
-  image(demon, x1, y1, 150, 150);
+  if (enemyMove) {
+    
+    imageMode(CENTER);
+    image(demon, x1, y1, 150, 150);
+    image(demon, x1 - 150, y1, 150, 150);
+    image(demon, x1 - 300, y1, 150, 150);
+  }
+
   
 }
+
+function enemiesMove() {
+  if (enemyMove) {
+    x1 = x1 - 2;
+    y1 = y1 + random(-1, 1);
+  }
+  if (x1 <= -50) {
+    y1 = random(100, 700);
+    x1 = 1650;
+    
+  }
+ 
+  
+
+  }
+  //create sicko mode function in which lil uzi changes his hair every .5 second and like does something else that might look cool.
