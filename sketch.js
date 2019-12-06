@@ -1,4 +1,5 @@
 let uzi;
+var time = 0;
 let br;
 let x = 200;
 let y = 200;
@@ -8,7 +9,7 @@ let x1 = 1650;
 let y1 = 100;
 let moving = 0;
 
-
+let isSicko = false;
 let enemyMove = true;
 let uziVert = true;
 let movingLeft = false;
@@ -23,6 +24,12 @@ function preload() {
   vert = loadImage("assets/uzishoot.png");
   money = loadImage("assets/money.png");
   demon = loadImage("assets/demon.png");
+  s1 = loadImage("assets/uzishoot1.png");
+  s2 = loadImage("assets/uzishoot2.png");
+  s3 = loadImage("assets/uzishoot3.png");
+  s4 = loadImage("assets/uzishoot4.png");
+  s5 = loadImage("assets/uzishoot5.png");
+  s6 = loadImage("assets/uzishoot6.png");
 }
 
 function setup(){
@@ -83,6 +90,9 @@ function keyPressed() {
     uziVert = false;
     
   }
+  if (key === "z") {
+    isSicko = true;
+  }
 }
 
 function keyReleased() {
@@ -101,7 +111,11 @@ function keyReleased() {
     uziVert = true;
     shot = 0;
   }
+  if (key === "z") {
+    isSicko = false;
+  }
 }
+
 
 function uziAttack() {
   imageMode(CENTER);
@@ -111,10 +125,6 @@ function uziAttack() {
     x += 15;
 
   }
-  
-
-
-
 }
 
 function enemies() {
@@ -138,6 +148,39 @@ function enemiesMove() {
     y1 = random(100, 700);
     x1 = 1650;
     
+  if (isSicko) {
+    if (millis() > time + 200) {
+      time = millis();
+      image(s1, x, y, 350, 350);
+        
+      }
+    if (millis() > time + 200) {
+      time = millis();
+      image(s2, x, y, 350, 350);
+        
+      }
+    if (millis() > time + 200) {
+      time = millis();
+      image(s3, x, y, 350, 350);
+        
+      }
+    if (millis() > time + 200) {
+      time = millis();
+      image(s4, x, y, 350, 350);
+        
+      }
+    if (millis() > time + 200) {
+      time = millis();
+      image(s5, x, y, 350, 350);
+        
+      }
+    if (millis() > time + 200) {
+      time = millis();
+      image(s6, x, y, 350, 350);
+        
+      }
+    
+    }
   }
  
   
