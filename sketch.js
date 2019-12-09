@@ -18,24 +18,35 @@ let isJump = false;
 let isFalling = true;
 let isAttack = false;
 let isSafe = false;
+let sicko;
+
 function preload() {
   uzi = loadImage("assets/uzi.png");
   br = loadImage("assets/pewpew.jpg");
   vert = loadImage("assets/uzishoot.png");
   money = loadImage("assets/money.png");
   demon = loadImage("assets/demon.png");
-  s1 = loadImage("assets/uzishoot1.png");
-  s2 = loadImage("assets/uzishoot2.png");
-  s3 = loadImage("assets/uzishoot3.png");
-  s4 = loadImage("assets/uzishoot4.png");
-  s5 = loadImage("assets/uzishoot5.png");
-  s6 = loadImage("assets/uzishoot6.png");
+  s11 = loadImage("assets/uzishoot1.png");
+  s22 = loadImage("assets/uzishoot2.png");
+  s33 = loadImage("assets/uzishoot3.png");
+  s44 = loadImage("assets/uzishoot4.png");
+  s55 = loadImage("assets/uzishoot5.png");
+  s66 = loadImage("assets/uzishoot6.png");
 }
 
 function setup(){
   w = windowWidth/2;
   h = windowHeight/2;
   createCanvas(windowWidth, windowHeight);
+  
+  let s1 = image(s11, x, y, 350, 350);
+  let s2 = image(s22, x, y, 350, 350);
+  let s3 = image(s33, x, y, 350, 350);
+  let s4 = image(s44, x, y, 350, 350);
+  let s5 = image(s55, x, y, 350, 350);
+  let s6 = image(s66, x, y, 350, 350);
+  sicko = [s1, s2, s3, s4, s5, s6];
+  
   
   
 }
@@ -48,7 +59,7 @@ function draw() {
   fill(0);
   enemies();
   enemiesMove();
-  
+  sickoModee();
 }
 
 function moveUzi() {
@@ -90,8 +101,9 @@ function keyPressed() {
     uziVert = false;
     
   }
-  if (key === "z") {
+  if (key === "s") {
     isSicko = true;
+    
   }
 }
 
@@ -111,7 +123,7 @@ function keyReleased() {
     uziVert = true;
     shot = 0;
   }
-  if (key === "z") {
+  if (key === "s") {
     isSicko = false;
   }
 }
@@ -125,6 +137,7 @@ function uziAttack() {
     x += 15;
 
   }
+
 }
 
 function enemies() {
@@ -148,42 +161,19 @@ function enemiesMove() {
     y1 = random(100, 700);
     x1 = 1650;
     
-  if (isSicko) {
-    if (millis() > time + 200) {
-      time = millis();
-      image(s1, x, y, 350, 350);
-        
-      }
-    if (millis() > time + 200) {
-      time = millis();
-      image(s2, x, y, 350, 350);
-        
-      }
-    if (millis() > time + 200) {
-      time = millis();
-      image(s3, x, y, 350, 350);
-        
-      }
-    if (millis() > time + 200) {
-      time = millis();
-      image(s4, x, y, 350, 350);
-        
-      }
-    if (millis() > time + 200) {
-      time = millis();
-      image(s5, x, y, 350, 350);
-        
-      }
-    if (millis() > time + 200) {
-      time = millis();
-      image(s6, x, y, 350, 350);
-        
-      }
-    
-    }
-  }
+
  
   
 
   }
-  //create sicko mode function in which lil uzi changes his hair every .5 second and like does something else that might look cool.
+}
+function sickoModee() {
+  if (isSicko) {
+    sickoMode = shuffle(sicko);
+    if (millis() > time + 100) {
+      time = millis();
+      (sickoMode); 
+    
+  }
+}
+}
