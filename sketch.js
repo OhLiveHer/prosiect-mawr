@@ -39,12 +39,12 @@ function setup(){
   h = windowHeight/2;
   createCanvas(windowWidth, windowHeight);
   
-  let s1 = image(s11, x, y, 350, 350);
-  let s2 = image(s22, x, y, 350, 350);
-  let s3 = image(s33, x, y, 350, 350);
-  let s4 = image(s44, x, y, 350, 350);
-  let s5 = image(s55, x, y, 350, 350);
-  let s6 = image(s66, x, y, 350, 350);
+  s1 = image(s11, x, y, 350, 350);
+  s2 = image(s22, x, y, 350, 350);
+  s3 = image(s33, x, y, 350, 350);
+  s4 = image(s44, x, y, 350, 350);
+  s5 = image(s55, x, y, 350, 350);
+  s6 = image(s66, x, y, 350, 350);
   sicko = [s1, s2, s3, s4, s5, s6];
   
   
@@ -104,6 +104,9 @@ function keyPressed() {
   if (key === "s") {
     isSicko = true;
     
+  }
+  if (key === "f") {
+    isFalling = false;
   }
 }
 
@@ -172,8 +175,9 @@ function sickoModee() {
     sickoMode = shuffle(sicko);
     if (millis() > time + 100) {
       time = millis();
-      (sickoMode); 
+      
     
   }
+  console.log(sickoMode);
 }
 }
