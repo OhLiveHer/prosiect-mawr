@@ -39,12 +39,12 @@ function setup(){
   h = windowHeight/2;
   createCanvas(windowWidth, windowHeight);
   
-  s1 = image(s11, x, y, 350, 350);
-  s2 = image(s22, x, y, 350, 350);
-  s3 = image(s33, x, y, 350, 350);
-  s4 = image(s44, x, y, 350, 350);
-  s5 = image(s55, x, y, 350, 350);
-  s6 = image(s66, x, y, 350, 350);
+  s1 = s11;
+  s2 = s22;
+  s3 = s33; 
+  s4 = s44; 
+  s5 = s55; 
+  s6 = s66; 
   sicko = [s1, s2, s3, s4, s5, s6];
   
   
@@ -59,7 +59,7 @@ function draw() {
   fill(0);
   enemies();
   enemiesMove();
-  sickoModee();
+  uziMode();
 }
 
 function moveUzi() {
@@ -103,6 +103,7 @@ function keyPressed() {
   }
   if (key === "s") {
     isSicko = true;
+    uziVert = false;
     
   }
   if (key === "f") {
@@ -128,6 +129,7 @@ function keyReleased() {
   }
   if (key === "s") {
     isSicko = false;
+    uziVert = true;
   }
 }
 
@@ -170,14 +172,10 @@ function enemiesMove() {
 
   }
 }
-function sickoModee() {
+function uziMode() {
   if (isSicko) {
     sickoMode = shuffle(sicko);
-    if (millis() > time + 100) {
-      time = millis();
-      
+    image(sickoMode[0], x, y, 350, 350);
     
-  }
-  console.log(sickoMode);
-}
+ }
 }
