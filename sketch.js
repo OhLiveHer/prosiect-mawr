@@ -9,6 +9,7 @@ let x1 = 1650;
 let y1 = 100;
 let moving = 0;
 
+let gameOver = false;
 let isSicko = false;
 let enemyMove = true;
 let uziVert = true;
@@ -60,12 +61,24 @@ function draw() {
   enemies();
   enemiesMove();
   uziMode();
+  if (gameOver) {
+    textSize(63);
+    textAlign(CENTER);
+    text("GAME OVER", width/2, height/2);
+    uziVert = false;
+  }
 }
 
 function moveUzi() {
   if (uziVert) {
     imageMode(CENTER)
     image(uzi, x, y, 350, 350);
+    if (y < -50 || y > 750) {
+      gameOver = true;
+    }
+    else {
+      gameOver = false;
+    }
   }
   if (movingLeft) {
     x -=3;
@@ -176,6 +189,7 @@ function uziMode() {
   if (isSicko) {
     sickoMode = shuffle(sicko);
     image(sickoMode[0], x, y, 350, 350);
+    
     
  }
 }
