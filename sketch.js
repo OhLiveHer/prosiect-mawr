@@ -8,6 +8,7 @@ let money = 0;
 let x1 = 1650;
 let y1 = 100;
 let moving = 0;
+let killCount = 0;
 
 let gameOver = false;
 let isSicko = false;
@@ -23,7 +24,7 @@ let sicko;
 
 function preload() {
   uzi = loadImage("assets/uzi.png");
-  br = loadImage("assets/pewpew.jpg");
+  br = loadImage("assets/br1.jpg");
   vert = loadImage("assets/uzishoot.png");
   money = loadImage("assets/money.png");
   demon = loadImage("assets/demon.png");
@@ -118,6 +119,7 @@ function keyPressed() {
     isSicko = true;
     uziVert = false;
     
+    
   }
   if (key === "f") {
     isFalling = false;
@@ -156,6 +158,8 @@ function uziAttack() {
 
   }
 
+ 
+
 }
 
 function enemies() {
@@ -193,3 +197,5 @@ function uziMode() {
     
  }
 }
+
+
