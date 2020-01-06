@@ -21,8 +21,11 @@ let isFalling = true;
 let isAttack = false;
 let isSafe = false;
 let sicko;
+let state = "menu";
 
 function preload() {
+  
+  mySound = loadSound("assets/444.mp3");
   uzi = loadImage("assets/uzi.png");
   br = loadImage("assets/br1.jpg");
   vert = loadImage("assets/uzishoot.png");
@@ -49,7 +52,8 @@ function setup(){
   s6 = s66; 
   sicko = [s1, s2, s3, s4, s5, s6];
   
-  
+  // mySound.setVolume(0.1);
+  mySound.play();
   
 }
 
@@ -57,11 +61,17 @@ function setup(){
 function draw() {
   imageMode(CORNER);
   background(br);
+  if (state === "menu") {
+    menu();
+  }
+  else if (state === "game"){
+
   moveUzi();
   fill(0);
   enemies();
   enemiesMove();
   uziMode();
+}
   if (gameOver) {
     textSize(63);
     textAlign(CENTER);
@@ -71,6 +81,7 @@ function draw() {
 }
 
 function moveUzi() {
+
   if (uziVert) {
     imageMode(CENTER)
     image(uzi, x, y, 350, 350);
@@ -163,6 +174,7 @@ function uziAttack() {
 }
 
 function enemies() {
+  
   if (enemyMove) {
     
     imageMode(CENTER);
@@ -197,5 +209,25 @@ function uziMode() {
     
  }
 }
+function menu() {
+  
+    
+    rectMode(CENTER);
+    fill(255, 182, 193, 0);
+    rect(width / 2, height / 2 + 150, 400, 150);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    textSize(50);
+    fill(255);
+    text("Begin", width/2, height/2 + 150);
+    if (mouseIsPressed) {
+        if (mouseX > width / 2  && mouseX < width/2 + 300 &&
+          mouseY > height/2  && mouseY < height/2 + 300) {
+            state = "game";      
+          }
 
+        }   
 
+      }
+
+    
