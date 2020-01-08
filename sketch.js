@@ -9,6 +9,7 @@ let x1 = 1650;
 let y1 = 100;
 let moving = 0;
 let killCount = 0;
+var gif_loadImg, gif_createImg;
 
 let gameOver = false;
 let isSicko = false;
@@ -24,10 +25,14 @@ let sicko;
 let state = "menu";
 
 function preload() {
+  gif_loadImg = loadImage("assets/title.gif");
+  gif_createImg = createImg("assets/title.gif");
+  
   
   mySound = loadSound("assets/444.mp3");
   uzi = loadImage("assets/uzi.png");
-  br = loadImage("assets/br1.jpg");
+  br1 = loadImage("assets/br1.jpg");
+  br = loadImage("assets/br.png");
   vert = loadImage("assets/uzishoot.png");
   money = loadImage("assets/money.png");
   demon = loadImage("assets/demon.png");
@@ -210,24 +215,28 @@ function uziMode() {
  }
 }
 function menu() {
+  imageMode(CORNER);
+  // background(br1);
+  menuButton();
+  gif_createImg.position(width/2, height/2);
   
-    
-    rectMode(CENTER);
-    fill(255, 182, 193, 0);
-    rect(width / 2, height / 2 + 150, 400, 150);
-    noStroke();
-    textAlign(CENTER, CENTER);
-    textSize(50);
-    fill(255);
-    text("Begin", width/2, height/2 + 150);
-    if (mouseIsPressed) {
-        if (mouseX > width / 2  && mouseX < width/2 + 300 &&
-          mouseY > height/2  && mouseY < height/2 + 300) {
-            state = "game";      
-          }
+}   
 
-        }   
 
+
+function menuButton() {
+  rectMode(CENTER);
+  fill(255, 182, 193);
+  rect(width / 2, height / 2 + 150, 400, 150);
+  noStroke();
+  textAlign(CENTER, CENTER);
+  textSize(50);
+  fill(255);
+  text("Begin", width/2, height/2 + 150);
+  if (mouseIsPressed) {
+    if (mouseX > width / 2 -150 && mouseX < width/2 + 150 &&
+      mouseY > height/2  && mouseY < height/2 + 300) {
+        state = "game";      
       }
-
-    
+    }
+  }

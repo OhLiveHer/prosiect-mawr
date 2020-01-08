@@ -8,3 +8,8 @@ body, html {
     display: none;
 }
  
+img {
+    position: absolute;
+    left: 33.3%;
+    top: 10%;
+}
