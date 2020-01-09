@@ -10,6 +10,7 @@ let y1 = 100;
 let moving = 0;
 let killCount = 0;
 var gif_loadImg, gif_createImg;
+let fade = 255;
 
 let gameOver = false;
 let isSicko = false;
@@ -216,22 +217,31 @@ function uziMode() {
 }
 function menu() {
   imageMode(CORNER);
-  // background(br1);
+  background(br1);
   menuButton();
-  gif_createImg.position(width/2, height/2);
+  gif_createImg.position(width/2 - 250, height/2 - 300);
+  if (state === "game") {
+    removeElements();
+  }
   
 }   
 
 
 
 function menuButton() {
+  if (fade > 5) {
+    fade -= 7;
+  }
+  else {
+    fade += 255;
+  }
   rectMode(CENTER);
-  fill(255, 182, 193);
+  fill(255, 182, 193, 0);
   rect(width / 2, height / 2 + 150, 400, 150);
   noStroke();
   textAlign(CENTER, CENTER);
   textSize(50);
-  fill(255);
+  fill(255, 255, 255, fade);
   text("Begin", width/2, height/2 + 150);
   if (mouseIsPressed) {
     if (mouseX > width / 2 -150 && mouseX < width/2 + 150 &&
