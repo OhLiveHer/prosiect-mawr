@@ -11,6 +11,8 @@ let moving = 0;
 let killCount = 0;
 var gif_loadImg, gif_createImg;
 let fade = 255;
+let moveCounter = 3;
+let moveCounter2 = 1;
 
 let gameOver = false;
 let isSicko = false;
@@ -128,13 +130,16 @@ function keyPressed() {
     isFalling = false;
   }
   if (key === " ") {
-    isAttack = true; 
-    uziVert = false;
-    
+    if (moveCounter > 0) {
+      isAttack = true; 
+      uziVert = false;
+    }
   }
   if (key === "s") {
-    isSicko = true;
-    uziVert = false;
+    if (moveCounter2 > 0) {
+      isSicko = true;
+      uziVert = false;
+    }
     
     
   }
@@ -157,11 +162,12 @@ function keyReleased() {
   if (key === " ") {
     isAttack = false;
     uziVert = true;
-    shot = 0;
+    moveCounter --; 
   }
   if (key === "s") {
     isSicko = false;
     uziVert = true;
+    moveCounter2 --; 
   }
 }
 
@@ -230,7 +236,7 @@ function menu() {
 
 function menuButton() {
   if (fade > 5) {
-    fade -= 7;
+    fade -= 3;
   }
   else {
     fade += 255;
@@ -250,3 +256,4 @@ function menuButton() {
       }
     }
   }
+
