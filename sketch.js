@@ -1,8 +1,8 @@
 let uzi;
 var time = 0;
 let br;
-let x = 200;
-let y = 200;
+let cx = 200;
+let cy = 200;
 let shot = 0;
 let money = 0;
 let x1 = 1650;
@@ -13,6 +13,13 @@ var gif_loadImg, gif_createImg;
 let fade = 255;
 let moveCounter = 3;
 let moveCounter2 = 1;
+let tiles;
+let spike, empty;
+let tilesHigh, tilesWide;
+let tileWidth, tileHeight;
+let levelToLoad;
+let lines;
+
 
 let gameOver = false;
 let isSicko = false;
@@ -26,10 +33,14 @@ let isAttack = false;
 let isSafe = false;
 let sicko;
 let state = "menu";
+let isDead = false;
+let isColliding = false;
 
 function preload() {
   gif_loadImg = loadImage("assets/title.gif");
   gif_createImg = createImg("assets/title.gif");
+  levelToLoad = "assets/levels/2.txt";
+  lines = loadStrings(levelToLoad);
   
   
   mySound = loadSound("assets/444.mp3");
@@ -45,12 +56,14 @@ function preload() {
   s44 = loadImage("assets/uzishoot4.png");
   s55 = loadImage("assets/uzishoot5.png");
   s66 = loadImage("assets/uzishoot6.png");
+  spike = loadImage("assets/images/spike.png");
+  empty = loadImage("assets/images/empty.png");
 }
 
 function setup(){
   w = windowWidth/2;
   h = windowHeight/2;
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1000, 750);
   
   s1 = s11;
   s2 = s22;
@@ -60,10 +73,29 @@ function setup(){
   s6 = s66; 
   sicko = [s1, s2, s3, s4, s5, s6];
   
-  // mySound.setVolume(0.1);
-  mySound.play();
   
+  // mySound.setVolume(0.1);
+  //mySound.play();
+  createCanvas(1000, 750);
+  
+  tilesHigh = lines.length;
+  tilesWide = lines[0].length;
+  
+  tileWidth = width / tilesWide;
+  tileHeight = height / tilesHigh;
+  
+  tiles = createEmpty2dArray(tilesWide, tilesHigh);
+  
+  //put values into 2d array of characters
+  for (let y = 0; y < tilesHigh; y++) {
+    for (let x = 0; x < tilesWide; x++) {
+      let tileType = lines[y][x];
+      tiles[x][y] = tileType;
+    }
+  }
 }
+
+
 
 
 function draw() {
@@ -73,27 +105,36 @@ function draw() {
     menu();
   }
   else if (state === "game"){
-
-  moveUzi();
-  fill(0);
-  enemies();
-  enemiesMove();
-  uziMode();
-}
+    display();
+    
+    moveUzi();
+    fill(0);
+    //enemies();
+    //enemiesMove();
+    uziMode();
+  }
   if (gameOver) {
     textSize(63);
     textAlign(CENTER);
     text("GAME OVER", width/2, height/2);
     uziVert = false;
-  }
+}
 }
 
 function moveUzi() {
+  let rectX1 = cx - 65;
+  let rectY1 = cy + 55;
+  let rectW1 = 115;
+  let rectH1 = 120;
 
+  
   if (uziVert) {
     imageMode(CENTER)
-    image(uzi, x, y, 350, 350);
-    if (y < -50 || y > 750) {
+    image(uzi, cx, cy, 250, 250);
+    fill(0, 0, 0, 50);
+    rect(rectX1, rectY1, rectW1, rectH1);
+    
+    if (cy < -50 || cy > 800) {
       gameOver = true;
     }
     else {
@@ -101,20 +142,23 @@ function moveUzi() {
     }
   }
   if (movingLeft) {
-    x -=3;
+    cx -=3;
   }
   if (movingRight) {
-    x +=3;
+    cx +=3;
   }
   if (isJump) {
-    y -= 10;
+    cy -= 10;
   }
   if (isFalling) {
-    y+= 5;
+    cy+= 5;
   }
   if (isAttack) {
     uziAttack();
     
+  }
+  if (isDead) {
+    state === "menu";
   }
 }
 
@@ -174,15 +218,15 @@ function keyReleased() {
 
 function uziAttack() {
   imageMode(CENTER);
-  image(vert, x, y, 350, 350);
+  image(vert, cx, cy, 250, 250);
   if (money = 3) {
-    y -= 5;
-    x += 15;
-
+    cy -= 5;
+    cx += 15;
+    
   }
-
- 
-
+  
+  
+  
 }
 
 function enemies() {
@@ -194,7 +238,11 @@ function enemies() {
     image(demon, x1 - 150, y1, 150, 150);
     image(demon, x1 - 300, y1, 150, 150);
   }
-
+  
+  
+  
+  
+  
   
 }
 
@@ -207,19 +255,19 @@ function enemiesMove() {
     y1 = random(100, 700);
     x1 = 1650;
     
-
- 
-  
-
+    
+    
+    
+    
   }
 }
 function uziMode() {
   if (isSicko) {
     sickoMode = shuffle(sicko);
-    image(sickoMode[0], x, y, 350, 350);
+    image(sickoMode[0], cx, cy, 250, 250);
     
     
- }
+  }
 }
 function menu() {
   imageMode(CORNER);
@@ -256,4 +304,89 @@ function menuButton() {
       }
     }
   }
+  
+  function display() {
+    
+    
+    for (let y = 0; y < tilesHigh; y++) {
+      for (let x = 0; x < tilesWide; x++) {
+        showTile(tiles[x][y], x, y);
+      }
+    }
+    
+  }
+  
+  function showTile(location, x, y) {
+    // let rectX1 = cx - 65;
+    // let rectY1 = cy + 55;
+    // let rectW1 = 115;
+    // let rectH1 = 120;
+    let rectX = (x * tileWidth) + 35;
+    let rectY = (y * tileHeight) + 35;
+    let rectW = tileWidth;
+    let rectH = tileHeight;
+    space = [];
+    
+    
 
+  
+  //   if (uziVert) {
+  //     imageMode(CENTER)
+  //     image(uzi, cx, cy, 250, 250);
+  //     fill(0, 0, 0, 50);
+  //     rect(rectX1, rectY1, rectW1, rectH1);
+    
+  //     if (cy < -50 || cy > 800) {
+  //       gameOver = true;
+  //     }
+  //     else {
+  //       gameOver = false;
+  //     }
+  //   }
+  //   if (movingLeft) {
+  //     cx -=3;
+  //   }
+  //   if (movingRight) {
+  //     cx +=3;
+  // }
+  //   if (isJump) {
+  //     cy -= 10;
+  // } 
+  //   if (isFalling) {
+  //     cy += 5;
+  //   }
+  //   if (isAttack) {
+  //     uziAttack();
+      
+  // }
+  //   if (isDead) {
+  //     state === "menu";
+  
+  if (location === "#") {
+    image(spike, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+    
+  } 
+  else {
+    rectMode(CENTER);
+    fill(255, 255, 255, 100);
+    rect(rectX, rectY, rectW, rectH);
+    image(empty, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+}
+      
+      
+      
+      
+}
+    
+  
+  
+  function createEmpty2dArray(cols, rows) {
+    let randomGrid = [];
+    for (let x = 0; x < cols; x++) {
+      randomGrid.push([]);
+      for (let y = 0; y < rows; y++) {
+        randomGrid[x].push(0);
+      }
+    }
+    return randomGrid;
+  }
