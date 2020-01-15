@@ -131,7 +131,7 @@ function moveUzi() {
   if (uziVert) {
     imageMode(CENTER)
     image(uzi, cx, cy, 250, 250);
-    fill(0, 0, 0, 50);
+    fill(0, 0, 0, 0);
     rect(rectX1, rectY1, rectW1, rectH1);
     
     if (cy < -50 || cy > 800) {
@@ -368,7 +368,7 @@ function menuButton() {
   } 
   else {
     rectMode(CENTER);
-    fill(255, 255, 255, 100);
+    fill(255, 255, 255, 0);
     rect(rectX, rectY, rectW, rectH);
     image(empty, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
 }
