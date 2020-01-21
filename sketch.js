@@ -21,6 +21,8 @@ let levelToLoad;
 let lines;
 
 
+
+
 let gameOver = false;
 let isSicko = false;
 let enemyMove = true;
@@ -39,7 +41,8 @@ let isColliding = false;
 function preload() {
   gif_loadImg = loadImage("assets/title.gif");
   gif_createImg = createImg("assets/title.gif");
-  levelToLoad = "assets/levels/2.txt";
+  //replacing the number with anything from 1 to 10 works
+  levelToLoad = "assets/levels/10.txt";
   lines = loadStrings(levelToLoad);
   
   
@@ -64,6 +67,8 @@ function setup(){
   w = windowWidth/2;
   h = windowHeight/2;
   createCanvas(1000, 750);
+
+   
   
   s1 = s11;
   s2 = s22;
@@ -95,8 +100,9 @@ function setup(){
   }
 }
 
+ 
 
-
+//game/menu state/ game over
 
 function draw() {
   imageMode(CORNER);
@@ -120,13 +126,13 @@ function draw() {
     uziVert = false;
 }
 }
-
+//Movement for character
 function moveUzi() {
+
   let rectX1 = cx - 65;
   let rectY1 = cy + 55;
   let rectW1 = 115;
   let rectH1 = 120;
-
   
   if (uziVert) {
     imageMode(CENTER)
@@ -134,7 +140,7 @@ function moveUzi() {
     fill(0, 0, 0, 0);
     rect(rectX1, rectY1, rectW1, rectH1);
     
-    if (cy < -50 || cy > 800) {
+    if (cy < -50 || cy > 800 || cx > 1200) {
       gameOver = true;
     }
     else {
@@ -158,10 +164,10 @@ function moveUzi() {
     
   }
   if (isDead) {
-    state === "menu";
+    state = "menu";
   }
 }
-
+//Off/On for booleans
 function keyPressed() {
   if (key === "a") {
     movingLeft = true;
@@ -190,8 +196,9 @@ function keyPressed() {
   if (key === "f") {
     isFalling = false;
   }
-}
 
+}
+//Off/On for booleans
 function keyReleased() {
   if (key === "a") {
     movingLeft = false;
@@ -215,7 +222,7 @@ function keyReleased() {
   }
 }
 
-
+//Attack 1
 function uziAttack() {
   imageMode(CENTER);
   image(vert, cx, cy, 250, 250);
@@ -245,7 +252,7 @@ function enemies() {
   
   
 }
-
+//enemies can be turned on or off does nothing due to collision detection problems
 function enemiesMove() {
   if (enemyMove) {
     x1 = x1 - 2;
@@ -261,6 +268,7 @@ function enemiesMove() {
     
   }
 }
+//attack 2
 function uziMode() {
   if (isSicko) {
     sickoMode = shuffle(sicko);
@@ -269,6 +277,7 @@ function uziMode() {
     
   }
 }
+//everything but buttons placement
 function menu() {
   imageMode(CORNER);
   background(br1);
@@ -281,7 +290,7 @@ function menu() {
 }   
 
 
-
+//Menu
 function menuButton() {
   if (fade > 5) {
     fade -= 3;
@@ -294,9 +303,9 @@ function menuButton() {
   rect(width / 2, height / 2 + 150, 400, 150);
   noStroke();
   textAlign(CENTER, CENTER);
-  textSize(50);
+  textSize(25);
   fill(255, 255, 255, fade);
-  text("Begin", width/2, height/2 + 150);
+  text("Begin (use w and s to get through the level as fast as possible)", width/2, height/2 + 150);
   if (mouseIsPressed) {
     if (mouseX > width / 2 -150 && mouseX < width/2 + 150 &&
       mouseY > height/2  && mouseY < height/2 + 300) {
@@ -304,7 +313,7 @@ function menuButton() {
       }
     }
   }
-  
+  //Displays the grid
   function display() {
     
     
@@ -317,69 +326,38 @@ function menuButton() {
   }
   
   function showTile(location, x, y) {
-    // let rectX1 = cx - 65;
-    // let rectY1 = cy + 55;
-    // let rectW1 = 115;
-    // let rectH1 = 120;
+
     let rectX = (x * tileWidth) + 35;
     let rectY = (y * tileHeight) + 35;
     let rectW = tileWidth;
     let rectH = tileHeight;
-    space = [];
+     
     
-    
-
   
-  //   if (uziVert) {
-  //     imageMode(CENTER)
-  //     image(uzi, cx, cy, 250, 250);
-  //     fill(0, 0, 0, 50);
-  //     rect(rectX1, rectY1, rectW1, rectH1);
-    
-  //     if (cy < -50 || cy > 800) {
-  //       gameOver = true;
-  //     }
-  //     else {
-  //       gameOver = false;
-  //     }
-  //   }
-  //   if (movingLeft) {
-  //     cx -=3;
-  //   }
-  //   if (movingRight) {
-  //     cx +=3;
-  // }
-  //   if (isJump) {
-  //     cy -= 10;
-  // } 
-  //   if (isFalling) {
-  //     cy += 5;
-  //   }
-  //   if (isAttack) {
-  //     uziAttack();
-      
-  // }
-  //   if (isDead) {
-  //     state === "menu";
-  
+//Places an x everywhere a # is
   if (location === "#") {
     image(spike, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
     
   } 
+//Fills in everything else with empty/a rectangle which would've helped with collision detection
   else {
     rectMode(CENTER);
     fill(255, 255, 255, 0);
     rect(rectX, rectY, rectW, rectH);
     image(empty, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
 }
-      
-      
-      
-      
-}
+// how collision detection should've worked but apparently no matter what rectX will never be defined
+  if (rectX1 > rectX || rectX1 < rectX || rectY1 > rectY || rectY1 < rectY){
+  isDead = false;
+  }
+  else {
+  isDead = true;
+  }
+
     
   
-  
+// creates the grid for images to be placed 
   function createEmpty2dArray(cols, rows) {
     let randomGrid = [];
     for (let x = 0; x < cols; x++) {
@@ -390,3 +368,4 @@ function menuButton() {
     }
     return randomGrid;
   }
+  
